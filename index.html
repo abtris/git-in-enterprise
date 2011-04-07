@@ -26,10 +26,10 @@
 <h2>Content</h2>
 
 <ul>
-<li>migration</li>
-<li>administration with gitolite</li>
+<li><a href="#section-Migration_from_SVN_to_Git">migration</a></li>
+<li><a href="#section-Gitolite_for_ACL">administration with gitolite</a></li>
 <li>possible workflows</li>
-<li>faq</li>
+<li><a href="#section-FAQ">faq</a></li>
 </ul>
       </td>
       <td class=code>
@@ -154,7 +154,34 @@
   <span class="n">cat</span> <span class="n">repos</span><span class="o">.</span><span class="n">list</span> <span class="o">|</span> <span class="k">while</span> <span class="n">read</span> <span class="no">LINE</span> <span class="p">;</span> <span class="k">do</span>
         <span class="n">N</span><span class="o">=</span><span class="err">$</span><span class="p">((</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">crep</span> <span class="vg">$LINE</span>
-  <span class="n">done</span>
+  <span class="n">done</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Gitolite_for_ACL'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Gitolite_for_ACL">&#182;</a>
+        </div>
+        <h2>Gitolite for ACL</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-9">&#182;</a>
+        </div>
+        <p>We setup <a href="http://sitaramc.github.com/gitolite/doc/3-faq-tips-etc.html#_personal_branches">personal branches</a> for better organization in repository</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">repo</span>    <span class="no">MAIN</span><span class="o">-</span><span class="no">REPOSITORY</span>
+        <span class="no">RW</span>      <span class="n">release</span> <span class="o">=</span> <span class="vi">@devs</span>
+        <span class="no">RW</span><span class="o">+</span>     <span class="n">personal</span><span class="o">/</span><span class="no">USER</span><span class="o">/</span>  <span class="o">=</span> <span class="vi">@devs</span>
+        <span class="no">RW</span><span class="o">+</span>     <span class="o">=</span> <span class="vi">@devs</span><span class="o">-</span><span class="n">leaders</span>
+        <span class="n">R</span>       <span class="o">=</span> <span class="vi">@devs</span>	
+  
   </pre></div>
       </td>
     </tr>
@@ -169,13 +196,12 @@
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-&amp;ndash;_How_set_upstream_branch_for_push_or_pull?'>
+    <tr id='section-How_set_upstream_branch_for_push_or_pull?'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-&amp;ndash;_How_set_upstream_branch_for_push_or_pull?">&#182;</a>
+          <a class="pilcrow" href="#section-How_set_upstream_branch_for_push_or_pull?">&#182;</a>
         </div>
-        <h3>&ndash; How set upstream branch for push or pull?</h3>
-
+        <h3>How set upstream branch for push or pull?</h3>
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="n">git</span> <span class="n">branch</span> <span class="o">--</span><span class="n">upstream</span> <span class="n">personal</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">release</span><span class="o">-</span><span class="mi">1</span> <span class="n">origin</span><span class="o">/</span><span class="n">personal</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">release</span><span class="o">-</span><span class="mi">1</span>
@@ -183,6 +209,18 @@
   <span class="ow">or</span> 	
 
   <span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">personal</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">release</span><span class="o">-</span><span class="mi">1</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-12'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-12">&#182;</a>
+        </div>
+        <h3></h3>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
       </td>
     </tr>
   </table>
