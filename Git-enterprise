@@ -1,9 +1,9 @@
 # [**Git**](http://git-scm.com) is a free & open source, distributed version control system designed to handle everything from small # to very large projects with speed and efficiency.
 ### Content
-# - migration
-# - administration with gitolite
+# - [migration](#section-Migration_from_SVN_to_Git)
+# - [administration with gitolite](#section-Gitolite_for_ACL)
 # - possible workflows
-# - faq
+# - [faq](#section-FAQ)
 
 ### Migration from SVN to Git
 
@@ -84,6 +84,17 @@ file_put_contents("authors.git.txt", $out);
         N=$((N+1))
         crep $LINE
 	done
+
+### Gitolite for ACL
+
+# We setup [personal branches](http://sitaramc.github.com/gitolite/doc/3-faq-tips-etc.html#_personal_branches) for better organization in repository
+
+	repo    MAIN-REPOSITORY
+        RW      release = @devs
+        RW+     personal/USER/  = @devs
+        RW+     = @devs-leaders
+        R       = @devs	
+	
 	
 ### FAQ
 
