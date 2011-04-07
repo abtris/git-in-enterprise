@@ -8,6 +8,7 @@ namespace :web do
     system "git add ." 
 	system "git commit -m 'Updated Git-enterprise website'"
     system "git push origin web:gh-pages"
+	system "git checkout master"
   end
 
 end
