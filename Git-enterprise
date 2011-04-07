@@ -87,6 +87,8 @@ file_put_contents("authors.git.txt", $out);
 
 ### Gitolite for ACL
 
+# We used SSH access for repository for better ACL than can used with Apache. ACL can be by branches and you can create/delete repository by editing gitolite config file
+
 # We setup [personal branches](http://sitaramc.github.com/gitolite/doc/3-faq-tips-etc.html#_personal_branches) for better organization in repository
 
 	repo    MAIN-REPOSITORY
