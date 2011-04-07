@@ -1,5 +1,98 @@
-# Nadpis
+# [**Git**](http://git-scm.com) is a free & open source, distributed version control system designed to handle everything from small # to very large projects with speed and efficiency.
+### Content
+# - migration
+# - administration with gitolite
+# - possible workflows
+# - faq
 
-text
+### Migration from SVN to Git
 
-exmaple
+# Generate all repository list
+
+ssh svn.server.com ls /path/to/repository/ > repos.list.full
+
+# We have some repository which can't migrate (projects, documents for non developers). All this types repository i write into repos.blacklist and generate migration list
+
+grep -v -f repos.blacklist repos.list.full > repos.list
+
+
+# For migration with history is useful authors list, i used this script
+
+svn log --xml http://svn.server.com/repository-name/ -r {2011-01-01}:HEAD | grep \<author | sort -u | sed -e :a -e 's/<[^<]*>/ /g;/</{N;s/\n/ /;ba;}' > authors.txt
+cat authors.txt | sort | uniq > authors-sorted.txt
+
+# With sorted and uniq list i connect into our Active Directory and get emails for generate authors mapping list from SVN to Git
+
+<?php 
+
+function getEmailFromLdap($username)
+{
+	$username = trim($username);
+	$ldap_server = "ldaps://ldap.example.com/" ;
+	$ldap_base_dn = "ou=Domain Users,ou=Users,dc=ad,dc=example,dc=com";
+	$ldap_bind_dn   = "CN=web service account,OU=Service Accounts,DC=ad,DC=com" ;
+	$ldap_bind_pass   = "XXXX"
+
+	//ldap_set_option($ad, LDAP_OPT_PROTOCOL_VERSION, 3);
+	//ldap_set_option($ad, LDAP_OPT_REFERRALS, 0);
+
+	$ldap_con = ldap_connect($ldap_server) or die("Could not connect to server. Error is " . ldap_error($ldap_con));
+	$ldap_bd = ldap_bind($ldap_con, $ldap_bind_dn, $ldap_bind_pass) or die("Could not bind to server. Error is " .ldap_error($ldap_con));
+	$result = ldap_search($ldap_con, $ldap_base_dn, "(sAMAccountName=$username)") or die ("Error in query");
+	$data = ldap_get_entries($ldap_con, $result);
+	return strtolower($data[0]['mail'][0]);
+}
+
+
+
+
+$authors = file_get_contents('authors-sorted.txt');
+$authors = explode("\n", $authors);
+$out = "";
+foreach ($authors as $a) {	
+	if (!empty($a)) {
+		echo $a . "\n";
+		$email = getEmailFromLdap($a);
+		if (empty($email)) { $email = "unknown@lmc.eu"; }
+		$out .=trim($a).' = '. $a ."<$email>\n";
+	}
+}
+
+file_put_contents("authors.git.txt", $out);
+
+
+
+# I make simple bash script for migration using git-svn and create ignore file and push all branches into new git repository
+
+	
+		function crep() {
+		REV=`svn log --xml http://svn.example.com/$1 -r {2011-01-01} | grep revision | awk -F \" '{print $2}'`
+    	git svn clone -r $REV:HEAD -s -A authors.git.txt http://svn.example.com/$1
+    	cd $1
+    	cp -Rf .git/refs/remotes/* .git/refs/heads/
+    	rm -Rf .git/refs/remotes
+    	git remote add origin ssh://git@git.example.com/$1.git
+    	git svn create-ignore
+    	git commit -a -v -m "Added .gitignore files, automatic conversion from svn:ignore" --author="Author <author@example.com>"
+    	git push origin --all
+    	cd ..
+    	echo "Cloned repository: $1"
+	}
+ 
+	N=0
+	cat repos.list | while read LINE ; do
+        N=$((N+1))
+        crep $LINE
+	done
+	
+### FAQ
+
+#### How set upstream branch for push or pull?
+
+	git branch --upstream personal/user/release-1 origin/personal/user/release-1
+ 	
+	or 	
+
+	git push -u origin personal/user/release-1
+
+#### 
