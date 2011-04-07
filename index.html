@@ -1,77 +1,191 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
-
-  <title>abtris/git-in-enterprise @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #9820b4;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #67df4b; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #67df4b; }
-    h3 { text-align: center; color: #67df4b; }
-    a { color: #67df4b; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>Git-enterprise</title>
+  <link rel="stylesheet" href="http://github.com/jashkenas/docco/raw/0.3.0/resources/docco.css">
 </head>
-
 <body>
-  <a href="http://github.com/abtris/git-in-enterprise"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<div id='container'>
+  <div id="background"></div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs><h1>Git-enterprise</h1></th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-Content'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Content">&#182;</a>
+        </div>
+        <p><a href="http://git-scm.com"><strong>Git</strong></a> is a free &amp; open source, distributed version control system designed to handle everything from small # to very large projects with speed and efficiency.</p>
 
-  <div id="container">
+<h2>Content</h2>
 
-    <div class="download">
-      <a href="http://github.com/abtris/git-in-enterprise/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/abtris/git-in-enterprise/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+<ul>
+<li>migration</li>
+<li>administration with gitolite</li>
+<li>possible workflows</li>
+<li>faq</li>
+</ul>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Migration_from_SVN_to_Git'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Migration_from_SVN_to_Git">&#182;</a>
+        </div>
+        <h2>Migration from SVN to Git</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>Generate all repository list</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">ssh</span> <span class="n">svn</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">com</span> <span class="n">ls</span><span class="sr"> /path/</span><span class="n">to</span><span class="o">/</span><span class="n">repository</span><span class="o">/</span> <span class="o">&gt;</span> <span class="n">repos</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">full</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <p>We have some repository which can&rsquo;t migrate (projects, documents for non developers). All this types repository i write into repos.blacklist and generate migration list</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">grep</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">f</span> <span class="n">repos</span><span class="o">.</span><span class="n">blacklist</span> <span class="n">repos</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">full</span> <span class="o">&gt;</span> <span class="n">repos</span><span class="o">.</span><span class="n">list</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>For migration with history is useful authors list, i used this script</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">svn</span> <span class="n">log</span> <span class="o">--</span><span class="n">xml</span> <span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">svn</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">repository</span><span class="o">-</span><span class="nb">name</span><span class="o">/</span> <span class="o">-</span><span class="n">r</span> <span class="p">{</span><span class="mi">2011</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">01</span><span class="p">}</span><span class="ss">:HEAD</span> <span class="o">|</span> <span class="n">grep</span> <span class="p">\</span><span class="o">&lt;</span><span class="n">author</span> <span class="o">|</span> <span class="n">sort</span> <span class="o">-</span><span class="n">u</span> <span class="o">|</span> <span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="ss">:a</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s/&lt;[^&lt;]*&gt;/ /g;/&lt;/{N;s/\n/ /;ba;}&#39;</span> <span class="o">&gt;</span> <span class="n">authors</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">cat</span> <span class="n">authors</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">sort</span> <span class="o">|</span> <span class="n">uniq</span> <span class="o">&gt;</span> <span class="n">authors</span><span class="o">-</span><span class="n">sorted</span><span class="o">.</span><span class="n">txt</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-6'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-6">&#182;</a>
+        </div>
+        <p>With sorted and uniq list i connect into our Active Directory and get emails for generate authors mapping list from SVN to Git</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="o">&lt;</span><span class="p">?</span><span class="n">php</span> 
 
-    <h1><a href="http://github.com/abtris/git-in-enterprise">git-in-enterprise</a>
-      <span class="small">by <a href="http://github.com/abtris">abtris</a></span></h1>
+<span class="n">function</span> <span class="n">getEmailFromLdap</span><span class="p">(</span><span class="vg">$username</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="vg">$username</span> <span class="o">=</span> <span class="n">trim</span><span class="p">(</span><span class="vg">$username</span><span class="p">);</span>
+  <span class="vg">$ldap_server</span> <span class="o">=</span> <span class="s2">&quot;ldaps://ldap.example.com/&quot;</span> <span class="p">;</span>
+  <span class="vg">$ldap_base_dn</span> <span class="o">=</span> <span class="s2">&quot;ou=Domain Users,ou=Users,dc=ad,dc=example,dc=com&quot;</span><span class="p">;</span>
+  <span class="vg">$ldap_bind_dn</span>   <span class="o">=</span> <span class="s2">&quot;CN=web service account,OU=Service Accounts,DC=ad,DC=com&quot;</span> <span class="p">;</span>
+  <span class="vg">$ldap_bind_pass</span>   <span class="o">=</span> <span class="s2">&quot;XXXX&quot;</span><span class="sr"></span>
 
-    <div class="description">
-      
-    </div>
+<span class="sr">  //ldap_set_option($ad, LDAP_OPT_PROTOCOL_VERSION, 3);</span>
+<span class="sr">  /</span><span class="o">/</span><span class="n">ldap_set_option</span><span class="p">(</span><span class="vg">$ad</span><span class="p">,</span> <span class="no">LDAP_OPT_REFERRALS</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-    <h2>Authors</h2>
-<p>Ladislav Prskavec (ladislav.prskavec@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Ladislav Prskavec (ladislav.prskavec@gmail.com)<br/>      </p>
+  <span class="vg">$ldap_con</span> <span class="o">=</span> <span class="n">ldap_connect</span><span class="p">(</span><span class="vg">$ldap_server</span><span class="p">)</span> <span class="ow">or</span> <span class="n">die</span><span class="p">(</span><span class="s2">&quot;Could not connect to server. Error is &quot;</span> <span class="o">.</span> <span class="n">ldap_error</span><span class="p">(</span><span class="vg">$ldap_con</span><span class="p">));</span>
+  <span class="vg">$ldap_bd</span> <span class="o">=</span> <span class="n">ldap_bind</span><span class="p">(</span><span class="vg">$ldap_con</span><span class="p">,</span> <span class="vg">$ldap_bind_dn</span><span class="p">,</span> <span class="vg">$ldap_bind_pass</span><span class="p">)</span> <span class="ow">or</span> <span class="n">die</span><span class="p">(</span><span class="s2">&quot;Could not bind to server. Error is &quot;</span> <span class="o">.</span><span class="n">ldap_error</span><span class="p">(</span><span class="vg">$ldap_con</span><span class="p">));</span>
+  <span class="vg">$result</span> <span class="o">=</span> <span class="n">ldap_search</span><span class="p">(</span><span class="vg">$ldap_con</span><span class="p">,</span> <span class="vg">$ldap_base_dn</span><span class="p">,</span> <span class="s2">&quot;(sAMAccountName=$username)&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">die</span> <span class="p">(</span><span class="s2">&quot;Error in query&quot;</span><span class="p">);</span>
+  <span class="vg">$data</span> <span class="o">=</span> <span class="n">ldap_get_entries</span><span class="p">(</span><span class="vg">$ldap_con</span><span class="p">,</span> <span class="vg">$result</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">strtolower</span><span class="p">(</span><span class="vg">$data</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="s1">&#39;mail&#39;</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
+<span class="p">}</span>
 
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/abtris/git-in-enterprise/zipball/master">zip</a> or
-      <a href="http://github.com/abtris/git-in-enterprise/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/abtris/git-in-enterprise</pre>
-    </p>
 
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/abtris/git-in-enterprise">abtris/git-in-enterprise</a>
-    </div>
 
-  </div>
+<span class="vg">$authors</span> <span class="o">=</span> <span class="n">file_get_contents</span><span class="p">(</span><span class="s1">&#39;authors-sorted.txt&#39;</span><span class="p">);</span>
+<span class="vg">$authors</span> <span class="o">=</span> <span class="n">explode</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="vg">$authors</span><span class="p">);</span>
+<span class="vg">$out</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="n">foreach</span> <span class="p">(</span><span class="vg">$authors</span> <span class="n">as</span> <span class="vg">$a</span><span class="p">)</span> <span class="p">{</span>	
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">empty</span><span class="p">(</span><span class="vg">$a</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">echo</span> <span class="vg">$a</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="vg">$email</span> <span class="o">=</span> <span class="n">getEmailFromLdap</span><span class="p">(</span><span class="vg">$a</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">empty</span><span class="p">(</span><span class="vg">$email</span><span class="p">))</span> <span class="p">{</span> <span class="vg">$email</span> <span class="o">=</span> <span class="s2">&quot;unknown@lmc.eu&quot;</span><span class="p">;</span> <span class="p">}</span>
+    <span class="vg">$out</span> <span class="o">.</span><span class="n">=trim</span><span class="p">(</span><span class="vg">$a</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39; = &#39;</span><span class="o">.</span> <span class="vg">$a</span> <span class="o">.</span><span class="s2">&quot;&lt;$email&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 
-  
+<span class="n">file_put_contents</span><span class="p">(</span><span class="s2">&quot;authors.git.txt&quot;</span><span class="p">,</span> <span class="vg">$out</span><span class="p">);</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-7'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-7">&#182;</a>
+        </div>
+        <p>I make simple bash script for migration using git-svn and create ignore file and push all branches into new git repository</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+    <span class="n">function</span> <span class="n">crep</span><span class="p">()</span> <span class="p">{</span>
+    <span class="no">REV</span><span class="o">=</span><span class="sb">`svn log --xml http://svn.example.com/$1 -r {2011-01-01} | grep revision | awk -F </span><span class="se">\&quot;</span><span class="sb"> &#39;{print $2}&#39;`</span>
+    	<span class="n">git</span> <span class="n">svn</span> <span class="nb">clone</span> <span class="o">-</span><span class="n">r</span> <span class="vg">$REV</span><span class="ss">:HEAD</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">A</span> <span class="n">authors</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">txt</span> <span class="n">http</span><span class="ss">:/</span><span class="o">/</span><span class="n">svn</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="vg">$1</span>
+    	<span class="n">cd</span> <span class="vg">$1</span>
+    	<span class="n">cp</span> <span class="o">-</span><span class="no">Rf</span> <span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">refs</span><span class="o">/</span><span class="n">remotes</span><span class="o">/*</span> <span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">refs</span><span class="o">/</span><span class="n">heads</span><span class="o">/</span>
+    	<span class="n">rm</span> <span class="o">-</span><span class="no">Rf</span> <span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">refs</span><span class="o">/</span><span class="n">remotes</span>
+    	<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">ssh</span><span class="ss">:/</span><span class="o">/</span><span class="n">git</span><span class="vi">@git</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="vg">$1</span><span class="o">.</span><span class="n">git</span>
+    	<span class="n">git</span> <span class="n">svn</span> <span class="n">create</span><span class="o">-</span><span class="n">ignore</span>
+    	<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Added .gitignore files, automatic conversion from svn:ignore&quot;</span> <span class="o">--</span><span class="n">author</span><span class="o">=</span><span class="s2">&quot;Author &lt;author@example.com&gt;&quot;</span>
+    	<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="o">--</span><span class="n">all</span>
+    	<span class="n">cd</span> <span class="o">.</span><span class="n">.</span>
+    	<span class="n">echo</span> <span class="s2">&quot;Cloned repository: $1&quot;</span>
+  <span class="p">}</span>
+ 
+  <span class="n">N</span><span class="o">=</span><span class="mi">0</span>
+  <span class="n">cat</span> <span class="n">repos</span><span class="o">.</span><span class="n">list</span> <span class="o">|</span> <span class="k">while</span> <span class="n">read</span> <span class="no">LINE</span> <span class="p">;</span> <span class="k">do</span>
+        <span class="n">N</span><span class="o">=</span><span class="err">$</span><span class="p">((</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">crep</span> <span class="vg">$LINE</span>
+  <span class="n">done</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-FAQ'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-FAQ">&#182;</a>
+        </div>
+        <h2>FAQ</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-&amp;ndash;_How_set_upstream_branch_for_push_or_pull?'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-&amp;ndash;_How_set_upstream_branch_for_push_or_pull?">&#182;</a>
+        </div>
+        <h3>&ndash; How set upstream branch for push or pull?</h3>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">git</span> <span class="n">branch</span> <span class="o">--</span><span class="n">upstream</span> <span class="n">personal</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">release</span><span class="o">-</span><span class="mi">1</span> <span class="n">origin</span><span class="o">/</span><span class="n">personal</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">release</span><span class="o">-</span><span class="mi">1</span>
+ 	
+  <span class="ow">or</span> 	
+
+  <span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">personal</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">release</span><span class="o">-</span><span class="mi">1</span></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
 </body>
-</html>
+>>>>>>> Stashed changes
