@@ -1,4 +1,9 @@
-# [**Git**](http://git-scm.com) is a free & open source, distributed version control system designed to handle everything from small # to very large projects with speed and efficiency.
+# [**Git**](http://git-scm.com) is a free & open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+### Case Study
+
+# We have 50 people in IT, Java and PHP in development, SVN for 50 repositories using by IT and Product. Now we can change development process to SCRUM and make shorter deploy cycle.
+
 ### Content
 # - [migration](#section-Migration_from_SVN_to_Git)
 # - [administration with gitolite](#section-Gitolite_for_ACL)
