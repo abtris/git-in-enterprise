@@ -16,14 +16,45 @@
     </tr>
   </thead>
   <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p><a href="http://git-scm.com"><strong>Git</strong></a> is a free &amp; open source, distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Case_Study'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Case_Study">&#182;</a>
+        </div>
+        <h2>Case Study</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>We have 50 people in IT, Java and PHP in development, SVN for 50 repositories using by IT and Product. Now we can change development process to SCRUM and make shorter deploy cycle.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
     <tr id='section-Content'>
       <td class=docs>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-Content">&#182;</a>
         </div>
-        <p><a href="http://git-scm.com"><strong>Git</strong></a> is a free &amp; open source, distributed version control system designed to handle everything from small # to very large projects with speed and efficiency.</p>
-
-<h2>Content</h2>
+        <h2>Content</h2>
 
 <ul>
 <li><a href="#section-Migration_from_SVN_to_Git">migration</a></li>
@@ -47,10 +78,10 @@
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-3'>
+    <tr id='section-6'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-3">&#182;</a>
+          <a class="pilcrow" href="#section-6">&#182;</a>
         </div>
         <p>Generate all repository list</p>
       </td>
@@ -58,10 +89,10 @@
         <div class='highlight'><pre><span class="n">ssh</span> <span class="n">svn</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">com</span> <span class="n">ls</span><span class="sr"> /path/</span><span class="n">to</span><span class="o">/</span><span class="n">repository</span><span class="o">/</span> <span class="o">&gt;</span> <span class="n">repos</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">full</span></pre></div>
       </td>
     </tr>
-    <tr id='section-4'>
+    <tr id='section-7'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-4">&#182;</a>
+          <a class="pilcrow" href="#section-7">&#182;</a>
         </div>
         <p>We have some repository which can&rsquo;t migrate (projects, documents for non developers). All this types repository i write into repos.blacklist and generate migration list</p>
       </td>
@@ -69,10 +100,10 @@
         <div class='highlight'><pre><span class="n">grep</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">f</span> <span class="n">repos</span><span class="o">.</span><span class="n">blacklist</span> <span class="n">repos</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">full</span> <span class="o">&gt;</span> <span class="n">repos</span><span class="o">.</span><span class="n">list</span></pre></div>
       </td>
     </tr>
-    <tr id='section-5'>
+    <tr id='section-8'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-5">&#182;</a>
+          <a class="pilcrow" href="#section-8">&#182;</a>
         </div>
         <p>For migration with history is useful authors list, i used this script</p>
       </td>
@@ -81,10 +112,10 @@
 <span class="n">cat</span> <span class="n">authors</span><span class="o">.</span><span class="n">txt</span> <span class="o">|</span> <span class="n">sort</span> <span class="o">|</span> <span class="n">uniq</span> <span class="o">&gt;</span> <span class="n">authors</span><span class="o">-</span><span class="n">sorted</span><span class="o">.</span><span class="n">txt</span></pre></div>
       </td>
     </tr>
-    <tr id='section-6'>
+    <tr id='section-9'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-6">&#182;</a>
+          <a class="pilcrow" href="#section-9">&#182;</a>
         </div>
         <p>With sorted and uniq list i connect into our Active Directory and get emails for generate authors mapping list from SVN to Git</p>
       </td>
@@ -127,10 +158,10 @@
 <span class="n">file_put_contents</span><span class="p">(</span><span class="s2">&quot;authors.git.txt&quot;</span><span class="p">,</span> <span class="vg">$out</span><span class="p">);</span></pre></div>
       </td>
     </tr>
-    <tr id='section-7'>
+    <tr id='section-10'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-7">&#182;</a>
+          <a class="pilcrow" href="#section-10">&#182;</a>
         </div>
         <p>I make simple bash script for migration using git-svn and create ignore file and push all branches into new git repository</p>
       </td>
@@ -168,10 +199,10 @@
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-9'>
+    <tr id='section-12'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-9">&#182;</a>
+          <a class="pilcrow" href="#section-12">&#182;</a>
         </div>
         <p>We used SSH access for repository for better ACL than can used with Apache. ACL can be by branches and you can create/delete repository by editing gitolite config file</p>
       </td>
@@ -179,10 +210,10 @@
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-10'>
+    <tr id='section-13'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-10">&#182;</a>
+          <a class="pilcrow" href="#section-13">&#182;</a>
         </div>
         <p>We setup <a href="http://sitaramc.github.com/gitolite/doc/3-faq-tips-etc.html#_personal_branches">personal branches</a> for better organization in repository</p>
       </td>
@@ -222,10 +253,10 @@
   <span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">personal</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">release</span><span class="o">-</span><span class="mi">1</span></pre></div>
       </td>
     </tr>
-    <tr id='section-13'>
+    <tr id='section-16'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-13">&#182;</a>
+          <a class="pilcrow" href="#section-16">&#182;</a>
         </div>
         <h3></h3>
 
